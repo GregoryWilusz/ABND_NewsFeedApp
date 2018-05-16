@@ -8,10 +8,10 @@ public class News {
 
     private String mSection;
     private String mTitle;
-    private long mPublicationDate;
+    private String mPublicationDate;
     private String mWebUrl;
 
-    public News(String section, String title, long publicationDate, String webUrl) {
+    public News(String section, String title, String publicationDate, String webUrl) {
         this.mSection = section;
         this.mTitle = title;
         this.mPublicationDate = publicationDate;
@@ -26,11 +26,21 @@ public class News {
         return mTitle;
     }
 
-    public long getmPublicationDate() {
+    public String getmPublicationDate() {
         return mPublicationDate;
     }
 
     public String getmWebUrl() {
         return mWebUrl;
+    }
+
+    @Override
+    public String toString() {
+        return "News{" +
+                "mSection='" + mSection + '\'' +
+                ", mTitle='" + mTitle + '\'' +
+                ", mPublicationDate='" + mPublicationDate + '\'' +
+                ", mWebUrl='" + mWebUrl + '\'' +
+                '}';
     }
 }
