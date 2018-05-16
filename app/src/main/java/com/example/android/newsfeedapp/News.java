@@ -18,19 +18,19 @@ public class News {
         this.mWebUrl = webUrl;
     }
 
-    public String getmSection() {
+    public String getSection() {
         return mSection;
     }
 
-    public String getmTitle() {
+    public String getTitle() {
         return mTitle;
     }
 
-    public String getmPublicationDate() {
+    public String getPublicationDate() {
         return mPublicationDate;
     }
 
-    public String getmWebUrl() {
+    public String getWebUrl() {
         return mWebUrl;
     }
 

@@ -39,9 +39,9 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
         final News currentNews = getItem(position);
 
-        sectionTextView.setText(currentNews.getmSection());
-        titleTextView.setText(currentNews.getmTitle());
-        publicationDateTextView.setText(currentNews.getmPublicationDate());
+        sectionTextView.setText(currentNews.getSection());
+        titleTextView.setText(currentNews.getTitle());
+        publicationDateTextView.setText(currentNews.getPublicationDate());
 
         return convertView;
     }
