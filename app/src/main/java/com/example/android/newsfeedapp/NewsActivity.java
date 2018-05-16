@@ -8,11 +8,11 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -23,8 +23,9 @@ public class NewsActivity extends AppCompatActivity implements LoaderCallbacks<L
     @BindView(R.id.list_view) ListView mNewsListView;
     @BindView(R.id.empty_state_view) TextView mEmptyTextView;
     @BindView(R.id.loading_indicator) View mIndicatorView;
-    public static final String REQUEST_URL = "http://content.guardianapis.com/search?section=books&from-date=2018-05-01&order-by=newest&page=1&page-size=15&api-key=test";
-    public static final int NEWS_LOADER_ID = 1;
+    private static final String REQUEST_URL = "http://content.guardianapis.com/search?section=books&from-date=2018-05-01&order-by=newest&page=1&page-size=15&api-key=test";
+    private static final int NEWS_LOADER_ID = 1;
+    private NewsAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,9 @@ public class NewsActivity extends AppCompatActivity implements LoaderCallbacks<L
         ButterKnife.bind(this);
 
         mNewsListView.setEmptyView(mEmptyTextView);
-        mIndicatorView.setVisibility(View.GONE);
+
+        mAdapter = new NewsAdapter(this, new ArrayList<News>());
+        mNewsListView.setAdapter(mAdapter);
 
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
@@ -46,8 +49,6 @@ public class NewsActivity extends AppCompatActivity implements LoaderCallbacks<L
             mIndicatorView.setVisibility(View.GONE);
             mEmptyTextView.setText(R.string.no_internet_connection);
         }
-
-
     }
 
     @Override
@@ -60,14 +61,15 @@ public class NewsActivity extends AppCompatActivity implements LoaderCallbacks<L
         mIndicatorView.setVisibility(View.GONE);
         mEmptyTextView.setText(R.string.no_news_found);
 
-        for (News eachNews: news) {
-            Log.i("TEST", "Data: " + String.valueOf(eachNews));
+        mAdapter.clear();
+        if (news != null && !news.isEmpty()) {
+            mAdapter.addAll(news);
         }
 
     }
 
     @Override
-    public void onLoaderReset(Loader loader) {
-
+    public void onLoaderReset(Loader<List<News>> loader) {
+        mAdapter.clear();
     }
 }
