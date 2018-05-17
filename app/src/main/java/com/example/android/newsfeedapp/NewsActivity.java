@@ -5,11 +5,15 @@ import android.app.LoaderManager.LoaderCallbacks;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -26,9 +30,26 @@ public class NewsActivity extends AppCompatActivity implements LoaderCallbacks<L
     @BindView(R.id.list_view) ListView mNewsListView;
     @BindView(R.id.empty_state_view) TextView mEmptyTextView;
     @BindView(R.id.loading_indicator) View mIndicatorView;
-    private static final String REQUEST_URL = "http://content.guardianapis.com/search?q=debates&section=politics&show-tags=contributor&page-size=15&order-by=newest&api-key=test";
+    private static final String REQUEST_URL = "http://content.guardianapis.com/search";
     private static final int NEWS_LOADER_ID = 1;
     private NewsAdapter mAdapter;
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsIntent = new Intent(this, SettingsActivity.class);
+            startActivity(settingsIntent);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +90,26 @@ public class NewsActivity extends AppCompatActivity implements LoaderCallbacks<L
 
     @Override
     public Loader onCreateLoader(int id, Bundle bundle) {
-        return new NewsLoader(this, REQUEST_URL);
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String pageSize = sharedPreferences.getString(
+            getString(R.string.settings_page_size_key),
+            getString(R.string.settings_page_size_default));
+
+        // ?q=debates&section=politics&show-tags=contributor&page-size=15&order-by=newest&api-key=test"
+        Uri baseUri = Uri.parse(REQUEST_URL);
+        Uri.Builder uriBuilder = baseUri.buildUpon();
+
+        uriBuilder.appendQueryParameter("q", "debates");
+        uriBuilder.appendQueryParameter("section", "politics");
+        uriBuilder.appendQueryParameter("show-tags", "contributor");
+        uriBuilder.appendQueryParameter("page-size", pageSize);
+        uriBuilder.appendQueryParameter("order-by", "newest");
+        uriBuilder.appendQueryParameter("api-key", "test");
+
+        System.out.println(uriBuilder.toString());
+        return new NewsLoader(this, uriBuilder.toString());
     }
 
     @Override
