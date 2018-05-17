@@ -130,10 +130,9 @@ public final class QueryUtils {
 
                         String contributorName = contributor.getString("webTitle");
                         contributors.add(contributorName);
-
-                        News singleNewsObject = new News(section, title, publicationDate, contributors, webUrl);
-                        news.add(singleNewsObject);
                     }
+                    News singleNewsObject = new News(section, title, publicationDate, contributors, webUrl);
+                    news.add(singleNewsObject);
                 } else {
                     News singleNewsObject = new News(section, title, publicationDate, webUrl);
                     news.add(singleNewsObject);
