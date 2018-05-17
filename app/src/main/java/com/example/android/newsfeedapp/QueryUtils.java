@@ -1,6 +1,5 @@
 package com.example.android.newsfeedapp;
 
-import android.os.Parcelable;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -28,6 +27,7 @@ public final class QueryUtils {
     public static final String LOG_TAG = QueryUtils.class.getName();
 
     public static List<News> fetchNewsData(String requestURL) {
+
         URL url = createUrl(requestURL);
 
         String jsonResponse = null;
