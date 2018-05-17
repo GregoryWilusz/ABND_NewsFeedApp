@@ -26,7 +26,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderCallbacks<L
     @BindView(R.id.list_view) ListView mNewsListView;
     @BindView(R.id.empty_state_view) TextView mEmptyTextView;
     @BindView(R.id.loading_indicator) View mIndicatorView;
-    private static final String REQUEST_URL = "http://content.guardianapis.com/search?section=books&from-date=2018-05-01&order-by=newest&page=1&page-size=15&api-key=test";
+    private static final String REQUEST_URL = "http://content.guardianapis.com/search?tag=technology%2Ffacebook&from-date=2018-05-01&order-by=newest&page-size=15&api-key=test";
     private static final int NEWS_LOADER_ID = 1;
     private NewsAdapter mAdapter;
 
