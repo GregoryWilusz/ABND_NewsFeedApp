@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -26,6 +27,7 @@ public class NewsAdapter extends ArrayAdapter<News> {
     @BindView(R.id.title_text_view) TextView titleTextView;
     @BindView(R.id.publication_date_text_view) TextView publicationDateTextView;
     @BindView(R.id.publication_time_text_view) TextView publicationTimeTextView;
+    @BindView(R.id.author_text_view) TextView authorTextView;
 
     public NewsAdapter(NewsActivity context, List<News> news) {
         super(context, 0, news);
@@ -48,6 +50,14 @@ public class NewsAdapter extends ArrayAdapter<News> {
 
         publicationDateTextView.setText(formatToDate(currentNews.getPublicationDate()));
         publicationTimeTextView.setText(formatToTime(currentNews.getPublicationDate()));
+
+        ArrayList<String> authors = currentNews.getAuthor();
+
+        if (authors == null) {
+            authorTextView.setVisibility(View.GONE);
+        } else {
+            authorTextView.setText(displayAuthors(authors));
+        }
 
         return convertView;
     }
@@ -73,5 +83,17 @@ public class NewsAdapter extends ArrayAdapter<News> {
             e.printStackTrace();
         }
         return formattedStringToTime;
+    }
+
+    private String displayAuthors(ArrayList<String> authors) {
+        StringBuilder authorsList = new StringBuilder();
+        for (String author : authors) {
+            if (authors.indexOf(author) != authors.size() - 1) {
+                authorsList.append(author).append(", ");
+            } else {
+                authorsList.append(author);
+            }
+        }
+        return authorsList.toString();
     }
 }

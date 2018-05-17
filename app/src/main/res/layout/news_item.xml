@@ -35,6 +35,15 @@
             android:maxLines="2"
             tools:text="Long article's title that should wrap to more than 2 lines of text to check if everything works properly" />
 
+        <TextView
+            android:id="@+id/author_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textAllCaps="true"
+            android:textSize="@dimen/detail_font_size"
+            tools:text="Jeremy Plant" />
+
     </LinearLayout>
 
     <LinearLayout

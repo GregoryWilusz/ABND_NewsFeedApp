@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">NewsFeedApp</string>
-    <string name="no_news_found">No news found.</string>
+    <string name="no_news_found">Houston, do we have a problem?\n
+        No, sure we don\'t.\n\n
+        You read this message the most probable because either
+        you have narrowed down your search criteria too much
+        or our servers are too busy right now.\n\n
+        Please try to load news again.</string>
     <string name="no_internet_connection">No internet connection.</string>
 </resources>
