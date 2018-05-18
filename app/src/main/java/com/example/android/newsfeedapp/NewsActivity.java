@@ -31,6 +31,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderCallbacks<L
     @BindView(R.id.empty_state_view) TextView mEmptyTextView;
     @BindView(R.id.loading_indicator) View mIndicatorView;
     private static final String REQUEST_URL = "http://content.guardianapis.com/search";
+    private static final String API_KEY = "f97054dc-1eba-44b8-a950-2848cf8b7176";
     private static final int NEWS_LOADER_ID = 1;
     private NewsAdapter mAdapter;
 
@@ -105,8 +106,6 @@ public class NewsActivity extends AppCompatActivity implements LoaderCallbacks<L
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_default));
 
-
-        // ?section=politics&show-tags=contributor&api-key=test"
         Uri baseUri = Uri.parse(REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
@@ -115,7 +114,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderCallbacks<L
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("page-size", pageSize);
         uriBuilder.appendQueryParameter("order-by", orderBy);
-        uriBuilder.appendQueryParameter("api-key", "test");
+        uriBuilder.appendQueryParameter("api-key", API_KEY);
 
         System.out.println(uriBuilder.toString());
         return new NewsLoader(this, uriBuilder.toString());
@@ -130,7 +129,6 @@ public class NewsActivity extends AppCompatActivity implements LoaderCallbacks<L
         if (news != null && !news.isEmpty()) {
             mAdapter.addAll(news);
         }
-
     }
 
     @Override

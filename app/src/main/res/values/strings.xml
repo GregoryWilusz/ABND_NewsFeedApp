@@ -17,11 +17,11 @@
     
     <string name="settings_query_label">Query</string>
     <string name="settings_query_key" translatable="false">query</string>
-    <string name="settings_query_default">debates</string>
+    <string name="settings_query_default" translatable="false">debates</string>
 
     <string name="settings_order_by_label">Order by</string>
     <string name="settings_order_by_key">order_by</string>
-    <string name="settings_order_by_default">@string/settings_order_by_newest_value</string>
+    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_newest_value</string>
 
     <string name="settings_order_by_newest_label">Newest</string>
     <string name="settings_order_by_newest_value" translatable="false">newest</string>
