@@ -97,11 +97,15 @@ public class NewsActivity extends AppCompatActivity implements LoaderCallbacks<L
             getString(R.string.settings_page_size_key),
             getString(R.string.settings_page_size_default));
 
-        // ?q=debates&section=politics&show-tags=contributor&page-size=15&order-by=newest&api-key=test"
+        String query = sharedPreferences.getString(
+                getString(R.string.settings_query_key),
+                getString(R.string.settings_query_default));
+
+        // ?q=debates&section=politics&show-tags=contributor&order-by=newest&api-key=test"
         Uri baseUri = Uri.parse(REQUEST_URL);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        uriBuilder.appendQueryParameter("q", "debates");
+        uriBuilder.appendQueryParameter("q", query);
         uriBuilder.appendQueryParameter("section", "politics");
         uriBuilder.appendQueryParameter("show-tags", "contributor");
         uriBuilder.appendQueryParameter("page-size", pageSize);

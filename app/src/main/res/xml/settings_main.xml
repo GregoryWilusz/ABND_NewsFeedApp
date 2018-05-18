@@ -8,4 +8,10 @@
         android:key="@string/settings_page_size_key"
         android:selectAllOnFocus="true"
         android:title="@string/settings_page_size_label" />
+    <EditTextPreference
+        android:defaultValue="@string/settings_query_default"
+        android:inputType="text"
+        android:key="@string/settings_query_key"
+        android:selectAllOnFocus="true"
+        android:title="@string/settings_query_label" />
 </PreferenceScreen>

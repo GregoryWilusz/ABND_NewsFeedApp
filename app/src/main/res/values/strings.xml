@@ -14,5 +14,9 @@
     <string name="settings_page_size_label">Page Size</string>
     <string name="settings_page_size_key" translatable="false">page_size</string>
     <string name="settings_page_size_default" translatable="false">5</string>
+    
+    <string name="settings_query_label">Query</string>
+    <string name="settings_query_key" translatable="false">query</string>
+    <string name="settings_query_default">debates</string>
 
 </resources>
