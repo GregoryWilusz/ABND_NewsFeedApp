@@ -1,6 +1,7 @@
 package com.example.android.newsfeedapp;
 
 import android.content.SharedPreferences;
+import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
@@ -28,13 +29,24 @@ public class SettingsActivity extends AppCompatActivity {
             Preference query = findPreference(getString(R.string.settings_query_key));
             bindPreferenceSummaryToValue(query);
 
+            Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
+            bindPreferenceSummaryToValue(orderBy);
         }
 
         @Override
         public boolean onPreferenceChange(Preference preference, Object newValue) {
             String stringValue = newValue.toString();
 
-            preference.setSummary(stringValue);
+            if (preference instanceof ListPreference) {
+                ListPreference listPreference = (ListPreference) preference;
+                int preferenceIndex = listPreference.findIndexOfValue(stringValue);
+                if (preferenceIndex >= 0) {
+                    CharSequence[] labels = listPreference.getEntries();
+                    preference.setSummary(labels[preferenceIndex]);
+                }
+            } else {
+                preference.setSummary(stringValue);
+            }
             return true;
         }
 
