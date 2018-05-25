@@ -1,4 +1,4 @@
-package com.example.android.newsfeedapp;
+package com.example.android.newsfeedapp.adapter;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -7,6 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import com.example.android.newsfeedapp.news.News;
+import com.example.android.newsfeedapp.news.NewsActivity;
+import com.example.android.newsfeedapp.R;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -23,40 +27,50 @@ import butterknife.ButterKnife;
 
 public class NewsAdapter extends ArrayAdapter<News> {
 
-    @BindView(R.id.section_text_view) TextView sectionTextView;
-    @BindView(R.id.title_text_view) TextView titleTextView;
-    @BindView(R.id.publication_date_text_view) TextView publicationDateTextView;
-    @BindView(R.id.publication_time_text_view) TextView publicationTimeTextView;
-    @BindView(R.id.author_text_view) TextView authorTextView;
 
     public NewsAdapter(NewsActivity context, List<News> news) {
         super(context, 0, news);
     }
 
+    static class ViewHolder {
+        @BindView(R.id.section_text_view) TextView sectionTextView;
+        @BindView(R.id.title_text_view) TextView titleTextView;
+        @BindView(R.id.publication_date_text_view) TextView publicationDateTextView;
+        @BindView(R.id.publication_time_text_view) TextView publicationTimeTextView;
+        @BindView(R.id.author_text_view) TextView authorTextView;
+
+        public ViewHolder(View view) {
+            ButterKnife.bind(this, view);
+        }
+    }
+
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        ViewHolder holder;
 
-        if (convertView == null) {
+        if (convertView != null) {
+            holder = (ViewHolder) convertView.getTag();
+        } else {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.news_item, parent, false);
+            holder = new ViewHolder(convertView);
+            convertView.setTag(holder);
         }
-
-        ButterKnife.bind(this, convertView);
 
         final News currentNews = getItem(position);
 
-        sectionTextView.setText(currentNews.getSection());
-        titleTextView.setText(currentNews.getTitle());
+        holder.sectionTextView.setText(currentNews.getSection());
+        holder.titleTextView.setText(currentNews.getTitle());
 
-        publicationDateTextView.setText(formatToDate(currentNews.getPublicationDate()));
-        publicationTimeTextView.setText(formatToTime(currentNews.getPublicationDate()));
+        holder.publicationDateTextView.setText(formatToDate(currentNews.getPublicationDate()));
+        holder.publicationTimeTextView.setText(formatToTime(currentNews.getPublicationDate()));
 
         ArrayList<String> authors = currentNews.getAuthor();
 
         if (authors == null) {
-            authorTextView.setVisibility(View.GONE);
+            holder.authorTextView.setVisibility(View.GONE);
         } else {
-            authorTextView.setText(displayAuthors(authors));
+            holder.authorTextView.setText(displayAuthors(authors));
         }
 
         return convertView;

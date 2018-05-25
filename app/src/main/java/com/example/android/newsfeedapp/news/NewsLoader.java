@@ -1,7 +1,9 @@
-package com.example.android.newsfeedapp;
+package com.example.android.newsfeedapp.news;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
+
+import com.example.android.newsfeedapp.QueryUtils;
 
 import java.util.List;
 

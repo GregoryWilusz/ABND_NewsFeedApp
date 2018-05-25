@@ -1,4 +1,4 @@
-package com.example.android.newsfeedapp;
+package com.example.android.newsfeedapp.news;
 
 import java.util.ArrayList;
 

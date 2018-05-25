@@ -3,6 +3,8 @@ package com.example.android.newsfeedapp;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.android.newsfeedapp.news.News;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +27,12 @@ import java.util.List;
 public final class QueryUtils {
 
     public static final String LOG_TAG = QueryUtils.class.getName();
+
+    // Suppress default constructor for noninstantiability
+    private QueryUtils() {
+        throw new AssertionError("No QueryUtils instances for you!");
+    } // This class will never be instantiated, so I can suppress the constructor.
+
 
     public static List<News> fetchNewsData(String requestURL) {
 

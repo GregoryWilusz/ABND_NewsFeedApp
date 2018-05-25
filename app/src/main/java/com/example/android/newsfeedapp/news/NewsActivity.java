@@ -1,4 +1,4 @@
-package com.example.android.newsfeedapp;
+package com.example.android.newsfeedapp.news;
 
 import android.app.LoaderManager;
 import android.app.LoaderManager.LoaderCallbacks;
@@ -18,6 +18,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.android.newsfeedapp.R;
+import com.example.android.newsfeedapp.SettingsActivity;
+import com.example.android.newsfeedapp.adapter.NewsAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
